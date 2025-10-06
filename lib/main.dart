@@ -1137,7 +1137,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           title: Row(
             children: [
               Icon(Icons.volunteer_activism, color: Colors.green[600]),
@@ -1211,7 +1212,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         backgroundColor: Colors.lightGreen[600],
       ),
     );
-    
+
     // In production, this would track real eco habits
     // For demo, we'll simulate a habit completion
   }
@@ -1236,7 +1237,8 @@ class _TreeProgressScreenState extends State<TreeProgressScreen>
   int _totalTaps = 120;
   DateTime? _lastTapTime;
   bool _isShowingSnackBar = false;
-  String _currentSeason = 'day'; // day, night, morning-sakura, morning-autumn, morning-rainy, morning-winter
+  String _currentSeason =
+      'day'; // day, night, morning-sakura, morning-autumn, morning-rainy, morning-winter
   int _seasonIndex = 0; // Index to cycle through seasons automatically
   String _currentWeather = 'sunny'; // sunny, cloudy, rainy, snowy, sakura
   bool _isDayTime = true;
@@ -1250,20 +1252,21 @@ class _TreeProgressScreenState extends State<TreeProgressScreen>
   List<String> _unlockedBadges = []; // List of earned badge IDs
   List<String> _unlockedAssets = []; // List of unlocked forest assets
   Map<String, bool> _achievements = {}; // Achievement completion status
-  
+
   // Tree type tracking system
   Map<String, int> _treeTypeCount = {
-    'tap': 0,          // Trees from tapping
-    'donation': 0,     // Trees from donations
-    'event': 0,        // Trees from events
-    'streak': 0,       // Trees from consistency streaks
-    'golden': 0,       // Special golden trees
-    'sakura': 0,       // Limited sakura trees
-    'ancient': 0,      // Rare ancient trees
-    'crystal': 0,      // Limited crystal trees
-    'rainbow': 0,      // Rainbow trees from seasonal achievements
+    'tap': 0, // Trees from tapping
+    'donation': 0, // Trees from donations
+    'event': 0, // Trees from events
+    'streak': 0, // Trees from consistency streaks
+    'golden': 0, // Special golden trees
+    'sakura': 0, // Limited sakura trees
+    'ancient': 0, // Rare ancient trees
+    'crystal': 0, // Limited crystal trees
+    'rainbow': 0, // Rainbow trees from seasonal achievements
   };
-  List<Map<String, dynamic>> _forestTrees = []; // Individual tree data with types
+  List<Map<String, dynamic>> _forestTrees =
+      []; // Individual tree data with types
 
   // Achievement definitions
   static const List<Map<String, dynamic>> _achievementList = [
@@ -1274,7 +1277,11 @@ class _TreeProgressScreenState extends State<TreeProgressScreen>
       'requirement': 'donation_amount',
       'target': 5.0,
       'reward': 'badge',
-      'rewardData': {'badge': 'tree_planter', 'asset': 'golden_sapling', 'treeType': 'donation'},
+      'rewardData': {
+        'badge': 'tree_planter',
+        'asset': 'golden_sapling',
+        'treeType': 'donation'
+      },
       'icon': Icons.volunteer_activism,
     },
     {
@@ -1284,7 +1291,11 @@ class _TreeProgressScreenState extends State<TreeProgressScreen>
       'requirement': 'donation_amount',
       'target': 50.0,
       'reward': 'special_tree',
-      'rewardData': {'theme': 'golden_forest', 'badge': 'forest_guardian', 'treeType': 'golden'},
+      'rewardData': {
+        'theme': 'golden_forest',
+        'badge': 'forest_guardian',
+        'treeType': 'golden'
+      },
       'icon': Icons.forest,
     },
     {
@@ -1294,7 +1305,11 @@ class _TreeProgressScreenState extends State<TreeProgressScreen>
       'requirement': 'donation_amount',
       'target': 100.0,
       'reward': 'special_asset',
-      'rewardData': {'asset': 'rainbow_trees', 'badge': 'earth_hero', 'treeType': 'ancient'},
+      'rewardData': {
+        'asset': 'rainbow_trees',
+        'badge': 'earth_hero',
+        'treeType': 'ancient'
+      },
       'icon': Icons.public,
     },
     {
@@ -1304,7 +1319,11 @@ class _TreeProgressScreenState extends State<TreeProgressScreen>
       'requirement': 'consistency_streak',
       'target': 3,
       'reward': 'badge',
-      'rewardData': {'badge': 'eco_beginner', 'asset': 'flower_patch', 'treeType': 'streak'},
+      'rewardData': {
+        'badge': 'eco_beginner',
+        'asset': 'flower_patch',
+        'treeType': 'streak'
+      },
       'icon': Icons.eco,
     },
     {
@@ -1314,7 +1333,11 @@ class _TreeProgressScreenState extends State<TreeProgressScreen>
       'requirement': 'consistency_streak',
       'target': 7,
       'reward': 'special_tree',
-      'rewardData': {'theme': 'spring_meadow', 'badge': 'green_champion', 'treeType': 'streak'},
+      'rewardData': {
+        'theme': 'spring_meadow',
+        'badge': 'green_champion',
+        'treeType': 'streak'
+      },
       'icon': Icons.emoji_events,
     },
     {
@@ -1324,7 +1347,11 @@ class _TreeProgressScreenState extends State<TreeProgressScreen>
       'requirement': 'consistency_streak',
       'target': 30,
       'reward': 'special_asset',
-      'rewardData': {'asset': 'ancient_oak', 'badge': 'eco_legend', 'treeType': 'rainbow'},
+      'rewardData': {
+        'asset': 'ancient_oak',
+        'badge': 'eco_legend',
+        'treeType': 'rainbow'
+      },
       'icon': Icons.stars,
     },
     {
@@ -1412,7 +1439,8 @@ class _TreeProgressScreenState extends State<TreeProgressScreen>
                 ),
                 const Spacer(),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
                     color: theme.colorScheme.primary.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(12),
@@ -1429,7 +1457,7 @@ class _TreeProgressScreenState extends State<TreeProgressScreen>
               ],
             ),
           ),
-          
+
           // Tree Type Grid
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -1441,21 +1469,30 @@ class _TreeProgressScreenState extends State<TreeProgressScreen>
               crossAxisSpacing: 8,
               mainAxisSpacing: 8,
               children: [
-                _buildTreeTypeCard('Tap Trees', Icons.park, Colors.green[400]!, '25', 'Tap to grow', true, theme),
-                _buildTreeTypeCard('Donation Trees', Icons.volunteer_activism, Colors.green[600]!, '8', 'Donate \$5+', true, theme),
-                _buildTreeTypeCard('Golden Trees', Icons.auto_awesome, Colors.amber, '3', 'Donate \$50+', true, theme),
-                _buildTreeTypeCard('Ancient Trees', Icons.forest, Colors.brown[800]!, '1', 'Donate \$100+', true, theme),
-                _buildTreeTypeCard('Streak Trees', Icons.eco, Colors.teal, '12', '3+ day streak', true, theme),
-                _buildTreeTypeCard('Sakura Trees', Icons.local_florist, Colors.pink[300]!, '0', 'Join events', false, theme),
-                _buildTreeTypeCard('Crystal Trees', Icons.diamond, Colors.cyan, '0', 'Earth Week only', false, theme),
-                _buildTreeTypeCard('Rainbow Trees', Icons.gradient, Colors.purple, '0', 'All seasons', false, theme),
-                _buildTreeTypeCard('Legendary Trees', Icons.stars, Colors.amber[700]!, '0', '30+ day streak', false, theme),
+                _buildTreeTypeCard('Tap Trees', Icons.park, Colors.green[400]!,
+                    '25', 'Tap to grow', true, theme),
+                _buildTreeTypeCard('Donation Trees', Icons.volunteer_activism,
+                    Colors.green[600]!, '8', 'Donate \$5+', true, theme),
+                _buildTreeTypeCard('Golden Trees', Icons.auto_awesome,
+                    Colors.amber, '3', 'Donate \$50+', true, theme),
+                _buildTreeTypeCard('Ancient Trees', Icons.forest,
+                    Colors.brown[800]!, '1', 'Donate \$100+', true, theme),
+                _buildTreeTypeCard('Streak Trees', Icons.eco, Colors.teal, '12',
+                    '3+ day streak', true, theme),
+                _buildTreeTypeCard('Sakura Trees', Icons.local_florist,
+                    Colors.pink[300]!, '0', 'Join events', false, theme),
+                _buildTreeTypeCard('Crystal Trees', Icons.diamond, Colors.cyan,
+                    '0', 'Earth Week only', false, theme),
+                _buildTreeTypeCard('Rainbow Trees', Icons.gradient,
+                    Colors.purple, '0', 'All seasons', false, theme),
+                _buildTreeTypeCard('Legendary Trees', Icons.stars,
+                    Colors.amber[700]!, '0', '30+ day streak', false, theme),
               ],
             ),
           ),
-          
+
           const SizedBox(height: 12),
-          
+
           // Achievement Progress
           Padding(
             padding: const EdgeInsets.all(16),
@@ -1471,13 +1508,37 @@ class _TreeProgressScreenState extends State<TreeProgressScreen>
                   ),
                 ),
                 const SizedBox(height: 8),
-                _buildAchievementProgressCard('Sakura Trees', 'Join a tree planting event', Icons.local_florist, Colors.pink[300]!, 0.0, theme),
+                _buildAchievementProgressCard(
+                    'Sakura Trees',
+                    'Join a tree planting event',
+                    Icons.local_florist,
+                    Colors.pink[300]!,
+                    0.0,
+                    theme),
                 const SizedBox(height: 6),
-                _buildAchievementProgressCard('Crystal Trees', 'Available during Earth Week (April 15-22)', Icons.diamond, Colors.cyan, 0.0, theme),
+                _buildAchievementProgressCard(
+                    'Crystal Trees',
+                    'Available during Earth Week (April 15-22)',
+                    Icons.diamond,
+                    Colors.cyan,
+                    0.0,
+                    theme),
                 const SizedBox(height: 6),
-                _buildAchievementProgressCard('Rainbow Trees', 'Experience all 6 seasons', Icons.gradient, Colors.purple, 0.4, theme),
+                _buildAchievementProgressCard(
+                    'Rainbow Trees',
+                    'Experience all 6 seasons',
+                    Icons.gradient,
+                    Colors.purple,
+                    0.4,
+                    theme),
                 const SizedBox(height: 6),
-                _buildAchievementProgressCard('Legendary Trees', '30-day streak (Current: 8 days)', Icons.stars, Colors.amber[700]!, 0.27, theme),
+                _buildAchievementProgressCard(
+                    'Legendary Trees',
+                    '30-day streak (Current: 8 days)',
+                    Icons.stars,
+                    Colors.amber[700]!,
+                    0.27,
+                    theme),
               ],
             ),
           ),
@@ -1485,14 +1546,19 @@ class _TreeProgressScreenState extends State<TreeProgressScreen>
       ),
     );
   }
-  
-  Widget _buildTreeTypeCard(String name, IconData icon, Color color, String count, String requirement, bool unlocked, ThemeData theme) {
+
+  Widget _buildTreeTypeCard(String name, IconData icon, Color color,
+      String count, String requirement, bool unlocked, ThemeData theme) {
     return Container(
       decoration: BoxDecoration(
-        color: unlocked ? theme.colorScheme.surface : theme.colorScheme.surface.withOpacity(0.5),
+        color: unlocked
+            ? theme.colorScheme.surface
+            : theme.colorScheme.surface.withOpacity(0.5),
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: unlocked ? color.withOpacity(0.3) : theme.colorScheme.outline.withOpacity(0.2),
+          color: unlocked
+              ? color.withOpacity(0.3)
+              : theme.colorScheme.outline.withOpacity(0.2),
         ),
       ),
       child: Column(
@@ -1502,7 +1568,8 @@ class _TreeProgressScreenState extends State<TreeProgressScreen>
             alignment: Alignment.center,
             children: [
               // Glow effect for special trees
-              if (unlocked && (name.contains('Golden') || name.contains('Crystal')))
+              if (unlocked &&
+                  (name.contains('Golden') || name.contains('Crystal')))
                 Container(
                   width: 32,
                   height: 32,
@@ -1520,7 +1587,9 @@ class _TreeProgressScreenState extends State<TreeProgressScreen>
               Icon(
                 icon,
                 size: 28,
-                color: unlocked ? color : theme.colorScheme.outline.withOpacity(0.5),
+                color: unlocked
+                    ? color
+                    : theme.colorScheme.outline.withOpacity(0.5),
               ),
               if (!unlocked)
                 Icon(
@@ -1536,7 +1605,9 @@ class _TreeProgressScreenState extends State<TreeProgressScreen>
             style: TextStyle(
               fontSize: 10,
               fontWeight: FontWeight.w600,
-              color: unlocked ? theme.colorScheme.onSurface : theme.colorScheme.outline,
+              color: unlocked
+                  ? theme.colorScheme.onSurface
+                  : theme.colorScheme.outline,
             ),
             textAlign: TextAlign.center,
           ),
@@ -1570,8 +1641,9 @@ class _TreeProgressScreenState extends State<TreeProgressScreen>
       ),
     );
   }
-  
-  Widget _buildAchievementProgressCard(String title, String description, IconData icon, Color color, double progress, ThemeData theme) {
+
+  Widget _buildAchievementProgressCard(String title, String description,
+      IconData icon, Color color, double progress, ThemeData theme) {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
@@ -1631,35 +1703,53 @@ class _TreeProgressScreenState extends State<TreeProgressScreen>
       ),
     );
   }
-  
+
   double _getTreeSizeForType(String type) {
     switch (type) {
-      case 'golden': return 35.0;
-      case 'ancient': return 40.0;
-      case 'crystal': return 30.0;
-      case 'sakura': return 25.0;
-      case 'rainbow': return 32.0;
-      case 'donation': return 28.0;
-      case 'event': return 26.0;
-      case 'streak': return 24.0;
-      default: return 20.0; // tap trees
+      case 'golden':
+        return 35.0;
+      case 'ancient':
+        return 40.0;
+      case 'crystal':
+        return 30.0;
+      case 'sakura':
+        return 25.0;
+      case 'rainbow':
+        return 32.0;
+      case 'donation':
+        return 28.0;
+      case 'event':
+        return 26.0;
+      case 'streak':
+        return 24.0;
+      default:
+        return 20.0; // tap trees
     }
   }
-  
+
   Color _getTreeColorForType(String type) {
     switch (type) {
-      case 'golden': return Colors.amber;
-      case 'ancient': return Colors.brown[800]!;
-      case 'crystal': return Colors.cyan;
-      case 'sakura': return Colors.pink[300]!;
-      case 'rainbow': return Colors.purple;
-      case 'donation': return Colors.green[600]!;
-      case 'event': return Colors.lightGreen;
-      case 'streak': return Colors.teal;
-      default: return Colors.green[400]!;
+      case 'golden':
+        return Colors.amber;
+      case 'ancient':
+        return Colors.brown[800]!;
+      case 'crystal':
+        return Colors.cyan;
+      case 'sakura':
+        return Colors.pink[300]!;
+      case 'rainbow':
+        return Colors.purple;
+      case 'donation':
+        return Colors.green[600]!;
+      case 'event':
+        return Colors.lightGreen;
+      case 'streak':
+        return Colors.teal;
+      default:
+        return Colors.green[400]!;
     }
   }
-  
+
   Map<String, dynamic> _getTreeSpecialEffects(String type) {
     switch (type) {
       case 'golden':
@@ -1870,7 +1960,8 @@ class _TreeProgressScreenState extends State<TreeProgressScreen>
                         ),
                         // Share Button
                         Positioned(
-                          top: 55, // Moved down for better spacing with tree count indicator
+                          top:
+                              55, // Moved down for better spacing with tree count indicator
                           right: 16,
                           child: _buildShareButton(theme),
                         ),
@@ -2139,11 +2230,18 @@ class _TreeProgressScreenState extends State<TreeProgressScreen>
 
   void _simulateEnvironment() {
     // Season controls day/night appearance - no separate timer needed
-    
+
     // Change seasons every 5 seconds for demo
     Timer.periodic(const Duration(seconds: 5), (timer) {
       if (mounted) {
-        final seasons = ['day', 'night', 'morning-sakura', 'morning-autumn', 'morning-rainy', 'morning-winter'];
+        final seasons = [
+          'day',
+          'night',
+          'morning-sakura',
+          'morning-autumn',
+          'morning-rainy',
+          'morning-winter'
+        ];
         setState(() {
           _seasonIndex = (_seasonIndex + 1) % seasons.length;
           _currentSeason = seasons[_seasonIndex];
@@ -2160,22 +2258,30 @@ class _TreeProgressScreenState extends State<TreeProgressScreen>
         setState(() {
           // Update rain particles continuously
           for (var particle in _rainParticles) {
-            particle['y'] = particle['y']! + particle['speed']! * 8; // Faster rain
+            particle['y'] =
+                particle['y']! + particle['speed']! * 8; // Faster rain
             if (particle['y']! > 400) {
               particle['y'] = -30.0;
-              particle['x'] = 15 + math.Random().nextDouble() * 350; // Match tree area
-              particle['speed'] = 0.8 + math.Random().nextDouble() * 1.2; // Faster speeds
+              particle['x'] =
+                  15 + math.Random().nextDouble() * 350; // Match tree area
+              particle['speed'] =
+                  0.8 + math.Random().nextDouble() * 1.2; // Faster speeds
             }
           }
-          
+
           // Update seasonal particles continuously
           for (var particle in _seasonalParticles) {
-            particle['y'] = particle['y']! + particle['speed']! * 6; // Faster falling
-            particle['rotation'] = particle['rotation']! + 0.05; // Faster rotation
-            if (particle['y']! > 400) { // Reset higher up
+            particle['y'] =
+                particle['y']! + particle['speed']! * 6; // Faster falling
+            particle['rotation'] =
+                particle['rotation']! + 0.05; // Faster rotation
+            if (particle['y']! > 400) {
+              // Reset higher up
               particle['y'] = -30.0;
-              particle['x'] = 15 + math.Random().nextDouble() * 350; // Match tree area
-              particle['speed'] = 0.6 + math.Random().nextDouble() * 1.0; // Faster speeds
+              particle['x'] =
+                  15 + math.Random().nextDouble() * 350; // Match tree area
+              particle['speed'] =
+                  0.6 + math.Random().nextDouble() * 1.0; // Faster speeds
             }
           }
         });
@@ -2209,7 +2315,7 @@ class _TreeProgressScreenState extends State<TreeProgressScreen>
       animation: _particleAnimation,
       builder: (context, child) {
         List<Widget> particles = [];
-        
+
         // Show particles based on current season
         switch (_currentSeason) {
           case 'morning-sakura':
@@ -2229,7 +2335,7 @@ class _TreeProgressScreenState extends State<TreeProgressScreen>
             // No objects falling during day or night
             break;
         }
-        
+
         return Stack(
           children: [
             ...particles,
@@ -2325,8 +2431,13 @@ class _TreeProgressScreenState extends State<TreeProgressScreen>
           angle: particle['rotation']!,
           child: Icon(
             Icons.local_florist,
-            color: ([Colors.pink[200], Colors.white, Colors.pink[100]][
-                particle['x']!.toInt() % 3] ?? Colors.pink).withOpacity(0.9),
+            color: ([
+                      Colors.pink[200],
+                      Colors.white,
+                      Colors.pink[100]
+                    ][particle['x']!.toInt() % 3] ??
+                    Colors.pink)
+                .withOpacity(0.9),
             size: 6 + (particle['size']! * 4), // Smaller sakura petals
           ),
         ),
@@ -2343,8 +2454,13 @@ class _TreeProgressScreenState extends State<TreeProgressScreen>
           angle: particle['rotation']!,
           child: Icon(
             Icons.local_florist,
-            color: ([Colors.pink[200], Colors.white, Colors.pink[100]][
-                particle['x']!.toInt() % 3] ?? Colors.pink).withOpacity(0.8),
+            color: ([
+                      Colors.pink[200],
+                      Colors.white,
+                      Colors.pink[100]
+                    ][particle['x']!.toInt() % 3] ??
+                    Colors.pink)
+                .withOpacity(0.8),
             size: 8 + (particle['size']! * 6),
           ),
         ),
@@ -2361,8 +2477,13 @@ class _TreeProgressScreenState extends State<TreeProgressScreen>
           angle: particle['rotation']!,
           child: Icon(
             Icons.star,
-            color: ([Colors.yellow[300], Colors.orange[200], Colors.amber[200]][
-                particle['x']!.toInt() % 3] ?? Colors.yellow).withOpacity(0.6),
+            color: ([
+                      Colors.yellow[300],
+                      Colors.orange[200],
+                      Colors.amber[200]
+                    ][particle['x']!.toInt() % 3] ??
+                    Colors.yellow)
+                .withOpacity(0.6),
             size: 6 + (particle['size']! * 4),
           ),
         ),
@@ -2379,8 +2500,13 @@ class _TreeProgressScreenState extends State<TreeProgressScreen>
           angle: particle['rotation']!,
           child: Icon(
             Icons.eco,
-            color: ([Colors.orange[400], Colors.red[400], Colors.brown[400]][
-                particle['x']!.toInt() % 3] ?? Colors.orange).withOpacity(0.8),
+            color: ([
+                      Colors.orange[400],
+                      Colors.red[400],
+                      Colors.brown[400]
+                    ][particle['x']!.toInt() % 3] ??
+                    Colors.orange)
+                .withOpacity(0.8),
             size: 8 + (particle['size']! * 6),
           ),
         ),
@@ -2428,8 +2554,13 @@ class _TreeProgressScreenState extends State<TreeProgressScreen>
           angle: particle['rotation']!,
           child: Icon(
             Icons.eco,
-            color: ([Colors.orange[400], Colors.red[400], Colors.brown[400]][
-                particle['x']!.toInt() % 3] ?? Colors.orange).withOpacity(0.8),
+            color: ([
+                      Colors.orange[400],
+                      Colors.red[400],
+                      Colors.brown[400]
+                    ][particle['x']!.toInt() % 3] ??
+                    Colors.orange)
+                .withOpacity(0.8),
             size: 8 + (particle['size']! * 6),
           ),
         ),
@@ -2459,7 +2590,8 @@ class _TreeProgressScreenState extends State<TreeProgressScreen>
     // Create 80 rain particles for good coverage without lag
     for (int i = 0; i < 80; i++) {
       _rainParticles.add({
-        'x': 15 + math.Random().nextDouble() * 350, // Match tree positioning area
+        'x': 15 +
+            math.Random().nextDouble() * 350, // Match tree positioning area
         'y': math.Random().nextDouble() * 200 - 50,
         'speed': 0.8 + math.Random().nextDouble() * 1.2, // Faster rain
         'initialY': math.Random().nextDouble() * 200 - 50,
@@ -2472,7 +2604,8 @@ class _TreeProgressScreenState extends State<TreeProgressScreen>
     // Create 35 seasonal particles for better visibility
     for (int i = 0; i < 35; i++) {
       _seasonalParticles.add({
-        'x': 15 + math.Random().nextDouble() * 350, // Match tree positioning area
+        'x': 15 +
+            math.Random().nextDouble() * 350, // Match tree positioning area
         'y': math.Random().nextDouble() * 200 - 50,
         'speed': 0.6 + math.Random().nextDouble() * 1.0, // Faster falling speed
         'rotation': math.Random().nextDouble() * 2 * math.pi,
@@ -2498,23 +2631,32 @@ class _TreeProgressScreenState extends State<TreeProgressScreen>
               children: List.generate(treeCount, (index) {
                 // Create scattered positions based on tree index
                 final positions = [
-                  Offset(25, 5), Offset(110, 12), Offset(200, 8),
-                  Offset(40, 40), Offset(140, 48), Offset(230, 35),
-                  Offset(15, 75), Offset(170, 82), Offset(260, 70),
-                  Offset(70, 110), Offset(190, 118), Offset(280, 105),
+                  Offset(25, 5),
+                  Offset(110, 12),
+                  Offset(200, 8),
+                  Offset(40, 40),
+                  Offset(140, 48),
+                  Offset(230, 35),
+                  Offset(15, 75),
+                  Offset(170, 82),
+                  Offset(260, 70),
+                  Offset(70, 110),
+                  Offset(190, 118),
+                  Offset(280, 105),
                 ];
-                
+
                 if (index >= positions.length) {
                   // Generate additional positions for higher tree counts
                   final x = (index * 73.5 + 25) % 350;
-                  final y = ((index ~/ 3) * 35 + 5 + (index % 7) * 10) % 140; // Reduced spacing
+                  final y = ((index ~/ 3) * 35 + 5 + (index % 7) * 10) %
+                      140; // Reduced spacing
                   return Positioned(
                     left: x,
                     top: y.toDouble(),
                     child: _buildEnhancedSingleTree(theme, index),
                   );
                 }
-                
+
                 return Positioned(
                   left: positions[index].dx,
                   top: positions[index].dy,
@@ -2536,16 +2678,17 @@ class _TreeProgressScreenState extends State<TreeProgressScreen>
     // Determine tree type based on forest trees if available
     String treeType = 'tap'; // default
     Color treeColor = Colors.green[400 + ((treeIndex % 4) * 100)]!;
-    double treeSize = 20.0 + ((_treeLevel - (treeIndex ~/ 3)) * 3).clamp(0, 12).toDouble();
+    double treeSize =
+        20.0 + ((_treeLevel - (treeIndex ~/ 3)) * 3).clamp(0, 12).toDouble();
     IconData treeIcon = Icons.park;
-    
+
     // Use specific tree data if available
     if (treeIndex < _forestTrees.length) {
       final treeData = _forestTrees[treeIndex];
       treeType = treeData['type'] ?? 'tap';
       treeColor = _getTreeColorForType(treeType);
       treeSize = _getTreeSizeForType(treeType);
-      
+
       // Special icons for different tree types
       switch (treeType) {
         case 'golden':
@@ -2567,11 +2710,15 @@ class _TreeProgressScreenState extends State<TreeProgressScreen>
           treeIcon = Icons.park;
       }
     }
-    
+
     // Add realistic bending to some trees
-    final bendAngle = (treeIndex % 5 == 0) ? 0.1 : 
-                      (treeIndex % 7 == 0) ? -0.15 : 
-                      (treeIndex % 3 == 0) ? 0.08 : 0.0;
+    final bendAngle = (treeIndex % 5 == 0)
+        ? 0.1
+        : (treeIndex % 7 == 0)
+            ? -0.15
+            : (treeIndex % 3 == 0)
+                ? 0.08
+                : 0.0;
 
     return AnimatedBuilder(
       animation: _weatherAnimation,
@@ -2800,7 +2947,8 @@ class _TreeProgressScreenState extends State<TreeProgressScreen>
     }
 
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8), // Reduced padding
+      padding: const EdgeInsets.symmetric(
+          horizontal: 12, vertical: 8), // Reduced padding
       decoration: BoxDecoration(
         color: statusColor.withOpacity(0.1),
         borderRadius: BorderRadius.circular(8), // Smaller border radius
@@ -2892,7 +3040,7 @@ class _TreeProgressScreenState extends State<TreeProgressScreen>
     setState(() {
       _totalTaps++;
       // Simple tree tap without type management
-      
+
       if (_totalTaps % 200 == 0) {
         _treeLevel++;
         _showLevelUpDialog();
@@ -2956,10 +3104,10 @@ class _TreeProgressScreenState extends State<TreeProgressScreen>
   void _checkAchievements() {
     for (final achievement in _achievementList) {
       final id = achievement['id'] as String;
-      
+
       // Skip if already achieved
       if (_achievements[id] == true) continue;
-      
+
       // Check time-limited achievements
       if (achievement['timeLimit'] == true) {
         DateTime now = DateTime.now();
@@ -2968,11 +3116,11 @@ class _TreeProgressScreenState extends State<TreeProgressScreen>
           continue; // Not during Earth Week
         }
       }
-      
+
       bool shouldUnlock = false;
       final requirement = achievement['requirement'] as String;
       final target = achievement['target'];
-      
+
       switch (requirement) {
         case 'donation_amount':
           shouldUnlock = _totalDonations >= target;
@@ -2997,20 +3145,20 @@ class _TreeProgressScreenState extends State<TreeProgressScreen>
           shouldUnlock = true; // Will be triggered by special events
           break;
       }
-      
+
       if (shouldUnlock) {
         _unlockAchievement(achievement);
       }
     }
   }
-  
+
   void _unlockAchievement(Map<String, dynamic> achievement) {
     final id = achievement['id'] as String;
     final rewardData = achievement['rewardData'] as Map<String, dynamic>;
-    
+
     setState(() {
       _achievements[id] = true;
-      
+
       // Add badge if included
       if (rewardData.containsKey('badge')) {
         final badge = rewardData['badge'] as String;
@@ -3018,7 +3166,7 @@ class _TreeProgressScreenState extends State<TreeProgressScreen>
           _unlockedBadges.add(badge);
         }
       }
-      
+
       // Add asset if included
       if (rewardData.containsKey('asset')) {
         final asset = rewardData['asset'] as String;
@@ -3026,20 +3174,21 @@ class _TreeProgressScreenState extends State<TreeProgressScreen>
           _unlockedAssets.add(asset);
         }
       }
-      
+
       // Add special tree if specified
       // Tree management disabled for demo
     });
-    
+
     _showAchievementDialog(achievement);
   }
-  
+
   void _showAchievementDialog(Map<String, dynamic> achievement) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -3074,7 +3223,8 @@ class _TreeProgressScreenState extends State<TreeProgressScreen>
                 ),
               ),
               const SizedBox(height: 16),
-              _buildRewardInfo(achievement['rewardData'] as Map<String, dynamic>),
+              _buildRewardInfo(
+                  achievement['rewardData'] as Map<String, dynamic>),
             ],
           ),
           actions: [
@@ -3087,10 +3237,10 @@ class _TreeProgressScreenState extends State<TreeProgressScreen>
       },
     );
   }
-  
+
   Widget _buildRewardInfo(Map<String, dynamic> rewardData) {
     List<Widget> rewards = [];
-    
+
     if (rewardData.containsKey('badge')) {
       rewards.add(
         Chip(
@@ -3100,7 +3250,7 @@ class _TreeProgressScreenState extends State<TreeProgressScreen>
         ),
       );
     }
-    
+
     if (rewardData.containsKey('asset')) {
       rewards.add(
         Chip(
@@ -3110,7 +3260,7 @@ class _TreeProgressScreenState extends State<TreeProgressScreen>
         ),
       );
     }
-    
+
     if (rewardData.containsKey('theme')) {
       rewards.add(
         Chip(
@@ -3120,26 +3270,26 @@ class _TreeProgressScreenState extends State<TreeProgressScreen>
         ),
       );
     }
-    
+
     return Wrap(
       spacing: 8,
       children: rewards,
     );
   }
-  
+
   void _addDonation(double amount) {
     setState(() {
       _totalDonations += amount;
     });
     _checkAchievements();
   }
-  
+
   void _completeEcoHabit() {
     final today = DateTime.now();
-    
+
     if (_lastHabitDate != null) {
       final daysDifference = today.difference(_lastHabitDate!).inDays;
-      
+
       if (daysDifference == 1) {
         // Consecutive day
         setState(() {
@@ -3166,16 +3316,16 @@ class _TreeProgressScreenState extends State<TreeProgressScreen>
         // Tree management disabled for demo
       });
     }
-    
+
     _checkAchievements();
   }
-  
+
   void _participateInEvent() {
     setState(() {
       // Tree management disabled for demo
     });
     _checkAchievements();
-    
+
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('Event participation recorded! Special tree added 🎪'),
@@ -4379,10 +4529,41 @@ class _HabitTrackerScreenState extends State<HabitTrackerScreen> {
     },
   ];
 
-  int get totalStreakDays =>
-      habits.fold(0, (sum, habit) => sum + (habit['streak'] as int));
-  double get completionRate =>
-      habits.where((h) => h['completed']).length / habits.length;
+  // Progress data for the last 7 days (completion percentages)
+  List<double> weeklyProgress = [0.8, 0.6, 1.0, 0.4, 0.8, 0.6, 0.8];
+  List<String> weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+
+  int get totalStreakDays {
+    if (habits.isEmpty) return 0;
+    return habits.fold(
+        0, (sum, habit) => sum + ((habit['streak'] as int?) ?? 0));
+  }
+
+  double get completionRate {
+    if (habits.isEmpty) return 0.0;
+    final completedCount = habits.where((h) => h['completed'] == true).length;
+    return completedCount / habits.length;
+  }
+
+  void _toggleHabitCompletion(int index) {
+    if (index < 0 || index >= habits.length) return;
+
+    setState(() {
+      habits[index]['completed'] = !(habits[index]['completed'] ?? false);
+
+      // Update today's progress (last item in weeklyProgress)
+      if (weeklyProgress.isNotEmpty) {
+        weeklyProgress[weeklyProgress.length - 1] = completionRate;
+      }
+
+      // Update streak
+      if (habits[index]['completed'] == true) {
+        habits[index]['streak'] = (habits[index]['streak'] ?? 0) + 1;
+      } else {
+        // Don't decrease streak immediately, but in real app you might want to
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -4500,57 +4681,292 @@ class _HabitTrackerScreenState extends State<HabitTrackerScreen> {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.3),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: Theme.of(context).colorScheme.outline.withOpacity(0.1),
+        gradient: LinearGradient(
+          colors: [Colors.green[50]!, Colors.white],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
         ),
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: Colors.green[100]!, width: 0.5),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.green.withOpacity(0.08),
+            blurRadius: 20,
+            offset: const Offset(0, 4),
+            spreadRadius: -2,
+          ),
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'Weekly Progress',
-            style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
-          ),
-          const SizedBox(height: 20),
-          Container(
-            height: 200,
-            decoration: BoxDecoration(
-              color: Colors.green[50],
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: Colors.green[200]!),
-            ),
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
                 children: [
-                  Icon(Icons.trending_up, size: 48, color: Colors.green[400]),
-                  const SizedBox(height: 8),
-                  Text(
-                    'Progress Chart',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.green[700],
+                  Container(
+                    width: 8,
+                    height: 8,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [Colors.green[400]!, Colors.green[600]!],
+                      ),
+                      shape: BoxShape.circle,
                     ),
                   ),
-                  const SizedBox(height: 4),
+                  const SizedBox(width: 12),
                   Text(
-                    'Track your habit streaks',
+                    'Weekly Journey',
                     style: TextStyle(
-                      fontSize: 12,
-                      color: Colors.green[600],
+                      fontSize: 18,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.grey[800],
+                      letterSpacing: -0.5,
                     ),
                   ),
                 ],
               ),
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [Colors.green[100]!, Colors.green[50]!],
+                  ),
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(color: Colors.green[200]!, width: 0.5),
+                ),
+                child: Text(
+                  '${(weeklyProgress.reduce((a, b) => a + b) / weeklyProgress.length * 100).toInt()}% avg',
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.green[700],
+                    letterSpacing: 0.2,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 24),
+          SizedBox(
+            height: 90, // Further reduced from 100 to 90
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: List.generate(weeklyProgress.length, (index) {
+                if (index >= weeklyProgress.length) return const SizedBox();
+
+                final progress = weeklyProgress[index].clamp(0.0, 1.0);
+                final isToday = index == weeklyProgress.length - 1;
+                final dayLabel = index < weekDays.length
+                    ? weekDays[index].substring(0, 1)
+                    : 'D';
+
+                return Expanded(
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 3),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      mainAxisSize:
+                          MainAxisSize.min, // Important to prevent overflow
+                      children: [
+                        // Progress value
+                        Text(
+                          '${(progress * 100).toInt()}',
+                          style: TextStyle(
+                            fontSize: 9, // Further reduced from 10
+                            fontWeight: FontWeight.w600,
+                            color:
+                                isToday ? Colors.green[700] : Colors.grey[600],
+                          ),
+                        ),
+                        const SizedBox(height: 3), // Further reduced from 4
+                        // Modern eco progress bar
+                        AnimatedContainer(
+                          duration:
+                              Duration(milliseconds: 1000 + (index * 150)),
+                          curve: Curves.easeOutQuart,
+                          height: (50 * progress).clamp(4.0, 50.0),
+                          width: 16,
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: isToday
+                                  ? [
+                                      Colors.green[400]!,
+                                      Colors.green[600]!,
+                                      Colors.green[500]!
+                                    ]
+                                  : progress > 0.8
+                                      ? [Colors.green[300]!, Colors.green[500]!]
+                                      : progress > 0.5
+                                          ? [
+                                              Colors.amber[300]!,
+                                              Colors.orange[400]!
+                                            ]
+                                          : [
+                                              Colors.grey[300]!,
+                                              Colors.grey[400]!
+                                            ],
+                              begin: Alignment.bottomCenter,
+                              end: Alignment.topCenter,
+                              stops: isToday ? [0.0, 0.5, 1.0] : [0.0, 1.0],
+                            ),
+                            borderRadius: BorderRadius.circular(10),
+                            boxShadow: progress > 0.5
+                                ? [
+                                    BoxShadow(
+                                      color: (isToday
+                                              ? Colors.green
+                                              : progress > 0.8
+                                                  ? Colors.green
+                                                  : Colors.amber)
+                                          .withOpacity(0.3),
+                                      blurRadius: 8,
+                                      offset: const Offset(0, 2),
+                                    ),
+                                  ]
+                                : null,
+                          ),
+                        ),
+                        const SizedBox(height: 4), // Further reduced from 6
+                        // Modern day indicator
+                        Container(
+                          width: 16,
+                          height: 16,
+                          decoration: BoxDecoration(
+                            gradient: isToday
+                                ? LinearGradient(
+                                    colors: [
+                                      Colors.green[100]!,
+                                      Colors.green[50]!
+                                    ],
+                                  )
+                                : null,
+                            color: !isToday ? Colors.transparent : null,
+                            shape: BoxShape.circle,
+                            border: isToday
+                                ? Border.all(
+                                    color: Colors.green[300]!,
+                                    width: 1.5,
+                                  )
+                                : null,
+                            boxShadow: isToday
+                                ? [
+                                    BoxShadow(
+                                      color: Colors.green.withOpacity(0.2),
+                                      blurRadius: 4,
+                                      offset: const Offset(0, 1),
+                                    ),
+                                  ]
+                                : null,
+                          ),
+                          child: Center(
+                            child: Text(
+                              dayLabel,
+                              style: TextStyle(
+                                fontSize: 9, // Further reduced from 10
+                                fontWeight:
+                                    isToday ? FontWeight.w600 : FontWeight.w500,
+                                color: isToday
+                                    ? Colors.green[700]
+                                    : Colors.grey[600],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              }),
+            ),
+          ),
+          const SizedBox(height: 16), // Reduced from 20
+          // Modern eco stats
+          Container(
+            padding: const EdgeInsets.symmetric(vertical: 16),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [Colors.green[50]!, Colors.white],
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+              ),
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(color: Colors.green[100]!, width: 0.5),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                _buildStatItem(
+                    'Streak', '$totalStreakDays days', Colors.green[600]!),
+                Container(
+                  width: 1,
+                  height: 30,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [Colors.green[100]!, Colors.green[200]!],
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                    ),
+                  ),
+                ),
+                _buildStatItem('Rate', '${(completionRate * 100).toInt()}%',
+                    Colors.amber[600]!),
+                Container(
+                  width: 1,
+                  height: 30,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [Colors.green[100]!, Colors.green[200]!],
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                    ),
+                  ),
+                ),
+                _buildStatItem('Habits', '${habits.length}', Colors.blue[600]!),
+              ],
             ),
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildStatItem(String label, String value, Color color) {
+    return Column(
+      children: [
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [color.withOpacity(0.1), color.withOpacity(0.05)],
+            ),
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: color.withOpacity(0.2), width: 0.5),
+          ),
+          child: Text(
+            value,
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w700,
+              color: color,
+              letterSpacing: -0.2,
+            ),
+          ),
+        ),
+        const SizedBox(height: 4),
+        Text(
+          label,
+          style: TextStyle(
+            fontSize: 11,
+            fontWeight: FontWeight.w600,
+            color: Colors.grey[600],
+            letterSpacing: 0.3,
+          ),
+        ),
+      ],
     );
   }
 
@@ -4565,12 +4981,21 @@ class _HabitTrackerScreenState extends State<HabitTrackerScreen> {
               ),
         ),
         const SizedBox(height: 16),
-        ...habits.map((habit) => _buildHabitCard(habit)).toList(),
+        ...habits.asMap().entries.map((entry) {
+          final index = entry.key;
+          final habit = entry.value;
+          return _buildHabitCard(habit, index);
+        }).toList(),
       ],
     );
   }
 
-  Widget _buildHabitCard(Map<String, dynamic> habit) {
+  Widget _buildHabitCard(Map<String, dynamic> habit, int index) {
+    final isCompleted = habit['completed'] ?? false;
+    final streakDays = habit['streak'] ?? 0;
+    final habitName = habit['name'] ?? 'Unknown Habit';
+    final habitImpact = habit['impact'] ?? 'No impact data';
+
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       padding: const EdgeInsets.all(20),
@@ -4578,7 +5003,7 @@ class _HabitTrackerScreenState extends State<HabitTrackerScreen> {
         color: Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.3),
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: habit['completed']
+          color: isCompleted
               ? Colors.green.withOpacity(0.3)
               : Theme.of(context).colorScheme.outline.withOpacity(0.1),
         ),
@@ -4587,9 +5012,7 @@ class _HabitTrackerScreenState extends State<HabitTrackerScreen> {
         children: [
           GestureDetector(
             onTap: () {
-              setState(() {
-                habit['completed'] = !habit['completed'];
-              });
+              _toggleHabitCompletion(index);
               HapticFeedback.lightImpact();
             },
             child: Container(
@@ -4597,15 +5020,15 @@ class _HabitTrackerScreenState extends State<HabitTrackerScreen> {
               height: 24,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: habit['completed'] ? Colors.green : Colors.transparent,
+                color: isCompleted ? Colors.green : Colors.transparent,
                 border: Border.all(
-                  color: habit['completed']
+                  color: isCompleted
                       ? Colors.green
                       : Theme.of(context).colorScheme.outline,
                   width: 2,
                 ),
               ),
-              child: habit['completed']
+              child: isCompleted
                   ? const Icon(Icons.check, color: Colors.white, size: 16)
                   : null,
             ),
@@ -4616,17 +5039,16 @@ class _HabitTrackerScreenState extends State<HabitTrackerScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  habit['name'],
+                  habitName,
                   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                         fontWeight: FontWeight.w500,
-                        decoration: habit['completed']
-                            ? TextDecoration.lineThrough
-                            : null,
+                        decoration:
+                            isCompleted ? TextDecoration.lineThrough : null,
                       ),
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  '${habit['streak']} day streak • ${habit['impact']}',
+                  '$streakDays day streak • $habitImpact',
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         color: Theme.of(context)
                             .colorScheme
@@ -5516,57 +5938,182 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
   }
 
   Widget _buildProgressChart() {
+    // Get top 5 performers for the chart
+    final topPerformers = globalLeaderboard.take(5).toList();
+    final maxScore =
+        topPerformers.isNotEmpty ? topPerformers.first['score'] : 1000;
+
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.3),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: Theme.of(context).colorScheme.outline.withOpacity(0.1),
+        gradient: LinearGradient(
+          colors: [Colors.green[50]!, Colors.white],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
         ),
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: Colors.green[100]!, width: 0.5),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.green.withOpacity(0.08),
+            blurRadius: 20,
+            offset: const Offset(0, 4),
+            spreadRadius: -2,
+          ),
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'Weekly Activity',
-            style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  fontWeight: FontWeight.bold,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Top Performers',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.grey[900],
+                  letterSpacing: -0.8,
                 ),
+              ),
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                decoration: BoxDecoration(
+                  color: Colors.grey[50],
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Text(
+                  'This Week',
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.grey[600],
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 24),
+          Container(
+            height: 65, // Further reduced to fit content
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: List.generate(topPerformers.length, (index) {
+                final user = topPerformers[index];
+                final score = user['score'] as int;
+                final name = user['name'] as String;
+                final avatar = user['avatar'] as String;
+                final progress = score / maxScore;
+                final rank = index + 1;
+
+                return Expanded(
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(
+                        horizontal: 2), // Reduced margin
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        // Clean score display
+                        Text(
+                          '${(score / 1000).toStringAsFixed(1)}k',
+                          style: TextStyle(
+                            fontSize: 9, // Reduced font size
+                            fontWeight: FontWeight.w600,
+                            color:
+                                rank == 1 ? Colors.grey[900] : Colors.grey[600],
+                          ),
+                        ),
+                        const SizedBox(height: 1), // Reduced from 2
+                        // Modern eco champion bar
+                        AnimatedContainer(
+                          duration:
+                              Duration(milliseconds: 1200 + (index * 200)),
+                          curve: Curves.easeOutQuart,
+                          height: (18 * progress)
+                              .clamp(3.0, 18.0), // Reduced max height
+                          width: 12, // Reduced width
+                          decoration: BoxDecoration(
+                            color: rank == 1
+                                ? Colors.grey[900]
+                                : rank == 2
+                                    ? Colors.grey[700]
+                                    : Colors.grey[300],
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                        const SizedBox(height: 1), // Further reduced
+                        // Clean avatar
+                        Container(
+                          width: 14, // Reduced size
+                          height: 14, // Reduced size
+                          decoration: BoxDecoration(
+                            color:
+                                rank == 1 ? Colors.grey[100] : Colors.grey[50],
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              color: rank == 1
+                                  ? Colors.grey[300]!
+                                  : Colors.grey[200]!,
+                              width: 1,
+                            ),
+                          ),
+                          child: Center(
+                            child: Text(
+                              avatar,
+                              style:
+                                  const TextStyle(fontSize: 7), // Reduced font
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 1), // Reduced from 2
+                        // Clean name
+                        Text(
+                          name.length > 5 ? '${name.substring(0, 5)}.' : name,
+                          style: TextStyle(
+                            fontSize: 8, // Reduced font size
+                            fontWeight:
+                                rank == 1 ? FontWeight.w600 : FontWeight.w400,
+                            color:
+                                rank == 1 ? Colors.grey[900] : Colors.grey[600],
+                          ),
+                          textAlign: TextAlign.center,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              }),
+            ),
           ),
           const SizedBox(height: 20),
-          Container(
-            height: 200,
-            decoration: BoxDecoration(
-              color: Colors.blue[50],
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: Colors.blue[200]!),
-            ),
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(Icons.leaderboard, size: 48, color: Colors.blue[400]),
-                  const SizedBox(height: 8),
-                  Text(
-                    'Leaderboard Chart',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.blue[700],
-                    ),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    'Weekly progress comparison',
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: Colors.blue[600],
-                    ),
-                  ),
-                ],
+          // Clean legend
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                width: 4,
+                height: 4,
+                decoration: BoxDecoration(
+                  color: Colors.grey[900],
+                  borderRadius: BorderRadius.circular(2),
+                ),
               ),
-            ),
+              const SizedBox(width: 8),
+              Text(
+                'Performance Score',
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Colors.grey[600],
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ],
           ),
         ],
       ),
